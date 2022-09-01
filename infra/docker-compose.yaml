@@ -9,7 +9,7 @@ services:
       - ./.env
 
   web:
-    image: PivnoyFei/yamdb_final:latest
+    image: pivnoyfei/yamdb_final:latest
     restart: always
     volumes:
       - static_value:/code/static/
