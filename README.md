@@ -94,6 +94,10 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ### После успешного деплоя:
+Переходим в папку с файлом docker-compose.yaml:
+```bash
+cd infra
+```
 Запуск docker-compose:
 ```bash
 docker-compose up -d --build

@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3'
 
 services:
   db:
@@ -9,11 +9,11 @@ services:
       - ./.env
 
   web:
-    image: kekkisama/yamdb_final:latest
+    image: kekkisama/yamdb_final
     restart: always
     volumes:
-      - static_value:/app/static/
-      - media_value:/app/media/
+      - static_value:/code/static/
+      - media_value:/code/media/
     depends_on:
       - db
     env_file:
