@@ -1,6 +1,6 @@
-from api_yamdb.settings import VALUE_DISPLAY
 from django.contrib import admin
 
+from api_yamdb.settings import VALUE_DISPLAY
 from reviews.models import Category, Comments, Genre, Review, Title, User
 
 
