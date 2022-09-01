@@ -1,7 +1,7 @@
 from django.contrib import admin
+from reviews.models import Category, Comments, Genre, Review, Title, User
 
 from api_yamdb.settings import VALUE_DISPLAY
-from reviews.models import Category, Comments, Genre, Review, Title, User
 
 
 @admin.register(Review)
