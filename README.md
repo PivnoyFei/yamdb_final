@@ -102,14 +102,10 @@ cd infra
 ```bash
 docker-compose up -d --build
 ```
-Соберите статические файлы (статику):
-```bash
-sudo docker-compose exec web python manage.py collectstatic --no-input
-```
 Примените миграции:
 ```bash
-sudo docker-compose exec web python manage.py makemigrations
-sudo docker-compose exec web python manage.py migrate --noinput
+docker-compose exec web python manage.py makemigrations
+docker-compose exec web python manage.py migrate --noinput
 ```
 Команда для заполнения базы начальными данными (необязательно):
 ```bash
@@ -117,7 +113,19 @@ docker-compose exec web python manage.py loaddata fixtures.json
 ```
 Создайте суперпользователя Django:
 ```bash
-sudo docker-compose exec web python manage.py createsuperuser
+docker-compose exec web python manage.py createsuperuser
+```
+Собираем статику:
+```bash
+docker-compose exec web python manage.py collectstatic --no-input
+```
+Создаем дамп базы данных:
+```bash
+docker-compose exec web python manage.py dumpdata > dumpPostrgeSQL.json
+```
+Останавливаем контейнеры:
+```bash
+docker-compose down -v
 ```
 
 ### Разработчики проекта

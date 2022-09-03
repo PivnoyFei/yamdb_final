@@ -9,7 +9,7 @@ services:
       - ./.env
 
   web:
-    image: kekkisama/yamdb_final:latest
+    image: kekkisama/yamdb_final:my-image
     restart: always
     volumes:
       - static_value:/code/static/
