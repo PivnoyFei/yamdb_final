@@ -42,7 +42,7 @@ jobs:
         with:
           push: true
           file: api_yamdb/Dockerfile
-          tags: kekkisama/yamdb_final:my-image
+          tags: ${{ secrets.DOCKER_USERNAME }}/yamdb_final:my-image
 
   deploy:
     runs-on: ubuntu-latest
