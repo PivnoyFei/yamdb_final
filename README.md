@@ -57,47 +57,7 @@ pytest
 Отредактируйте файл ```nginx/default.conf``` и в строке ```server_name``` впишите IP виртуальной машины (сервера).
 Скопируйте файлы ```docker-compose.yaml``` и ```nginx/default.conf``` из вашего проекта на сервер:
 
-### Зайдите в репозиторий на локальной машине и отправьте файлы на сервер.
-```bash
-scp docker-compose.yaml <username>@<host>:home/<username>/docker-compose.yaml
-sudo mkdir nginx
-scp default.conf <username>@<host>:home/<username>/nginx/default.conf
-```
-В репозитории на Гитхабе добавьте данные в ```Settings - Secrets - Actions secrets```:
 
-```
-DOCKER_USERNAME - имя пользователя в DockerHub
-DOCKER_PASSWORD - пароль пользователя в DockerHub
-
-HOST - ip-адрес сервера
-USER - пользователь
-SSH_KEY - приватный ssh-ключ (публичный должен быть на сервере)
-PASSPHRASE - кодовая фраза для ssh-ключа
-
-DB_ENGINE=django.db.backends.postgresql
-DB_NAME=postgres
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
-DB_HOST=db
-DB_PORT=5432
-SECRET_KEY - секретный ключ приложения django
-
-TELEGRAM_TO - id своего телеграм-аккаунта (можно узнать у @userinfobot, команда /start)
-TELEGRAM_TOKEN - токен бота (получить токен можно у @BotFather, /token, имя бота)
-```
-### Как запустить проект на сервере:
-Установите Docker и Docker-compose:
-```bash
-sudo apt install docker.io
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-```
-Проверьте корректность установки Docker-compose:
-```bash
-sudo  docker-compose --version
-```
-
-### После успешного деплоя:
 Переходим в папку с файлом docker-compose.yaml:
 ```bash
 cd infra
@@ -130,6 +90,47 @@ docker-compose exec web python manage.py dumpdata > dumpPostrgeSQL.json
 Останавливаем контейнеры:
 ```bash
 docker-compose down -v
+```
+
+## После успешного деплоя:
+### Зайдите в репозиторий в котором расположены файлы на локальной машине и отправьте файлы на сервер.
+```bash
+scp docker-compose.yaml <username>@<host>:<Нужная папка>/docker-compose.yaml
+sudo mkdir nginx
+scp default.conf <username>@<host>:<Нужная папка>/nginx/default.conf
+```
+### В репозитории на Гитхабе добавьте данные в ```Settings - Secrets - Actions secrets```:
+```
+DOCKER_USERNAME - имя пользователя в DockerHub
+DOCKER_PASSWORD - пароль пользователя в DockerHub
+
+HOST - публичный ip-адрес сервера
+USER - пользователь
+SSH_KEY - приватный ssh-ключ (публичный должен быть на сервере)
+PASSPHRASE - если используете пароль для ssh
+
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+DB_HOST=db
+DB_PORT=5432
+SECRET_KEY - секретный ключ приложения django
+
+TELEGRAM_TO - id своего телеграм-аккаунта (можно узнать у @userinfobot, команда /start)
+TELEGRAM_TOKEN - токен бота (получить токен можно у @BotFather, /token, имя бота)
+```
+
+### Как запустить проект на сервере:
+Установите Docker и Docker-compose:
+```bash
+sudo apt install docker.io
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+```
+Проверьте корректность установки Docker-compose:
+```bash
+sudo  docker-compose --version
 ```
 
 ### Разработчики проекта
